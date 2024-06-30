@@ -39,6 +39,11 @@ app.use('/api/documents', documents);
 app.use('/api/payments', payments);
 app.use('/api/subscriptions', subscriptions);
 
+// Root URL route
+app.get('/', (req, res) => {
+    res.send('Welcome to the Property Management API');
+});
+
 // Database connection
 sequelize.authenticate()
     .then(() => console.log('Database connected'))
