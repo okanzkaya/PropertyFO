@@ -1,31 +1,42 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import LoginPage from './pages/LoginPage';
-import RegisterPage from './pages/RegisterPage';
-import DashboardPage from './pages/DashboardPage';
-import PropertyPage from './pages/PropertyPage';
-import TenantPage from './pages/TenantPage';
-import TicketPage from './pages/TicketPage';
-import PaymentPage from './pages/PaymentPage';
-import DocumentPage from './pages/DocumentPage';
-import SubscriptionPage from './pages/SubscriptionPage';
+import { AuthProvider, useAuth } from './context/AuthContext';
+
+const LoginPage = lazy(() => import('./pages/LoginPage'));
+const RegisterPage = lazy(() => import('./pages/RegisterPage'));
+const DashboardPage = lazy(() => import('./pages/DashboardPage'));
+const PropertyPage = lazy(() => import('./pages/PropertyPage'));
+const TenantPage = lazy(() => import('./pages/TenantPage'));
+const TicketPage = lazy(() => import('./pages/TicketPage'));
+const PaymentPage = lazy(() => import('./pages/PaymentPage'));
+const DocumentPage = lazy(() => import('./pages/DocumentPage'));
+const SubscriptionPage = lazy(() => import('./pages/SubscriptionPage'));
+
+function PrivateRoute({ children }) {
+  const { user } = useAuth();
+  return user ? children : <Navigate to="/login" />;
+}
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/dashboard" element={<DashboardPage />} />
-        <Route path="/properties" element={<PropertyPage />} />
-        <Route path="/tenants" element={<TenantPage />} />
-        <Route path="/tickets" element={<TicketPage />} />
-        <Route path="/payments" element={<PaymentPage />} />
-        <Route path="/documents" element={<DocumentPage />} />
-        <Route path="/subscription" element={<SubscriptionPage />} />
-        <Route path="/" element={<LoginPage />} />
-      </Routes>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Routes>
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/dashboard" element={<PrivateRoute><DashboardPage /></PrivateRoute>} />
+            <Route path="/properties" element={<PrivateRoute><PropertyPage /></PrivateRoute>} />
+            <Route path="/tenants" element={<PrivateRoute><TenantPage /></PrivateRoute>} />
+            <Route path="/tickets" element={<PrivateRoute><TicketPage /></PrivateRoute>} />
+            <Route path="/payments" element={<PrivateRoute><PaymentPage /></PrivateRoute>} />
+            <Route path="/documents" element={<PrivateRoute><DocumentPage /></PrivateRoute>} />
+            <Route path="/subscription" element={<PrivateRoute><SubscriptionPage /></PrivateRoute>} />
+            <Route path="/" element={<LoginPage />} />
+          </Routes>
+        </Suspense>
+      </Router>
+    </AuthProvider>
   );
 }
 

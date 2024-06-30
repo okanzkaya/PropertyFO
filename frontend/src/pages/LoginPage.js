@@ -13,7 +13,11 @@ const LoginPage = () => {
       // Redirect to dashboard
       window.location.href = '/dashboard';
     } catch (error) {
-      setError('Invalid email or password');
+      if (error.response && error.response.data) {
+        setError(error.response.data.error);
+      } else {
+        setError('An unexpected error occurred');
+      }
     }
   };
 
