@@ -1,22 +1,20 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
-const Property = sequelize.define('Property', {
+const Tenant = sequelize.define('Tenant', {
   name: {
     type: DataTypes.STRING,
     allowNull: false
   },
-  address: {
+  email: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
+    unique: true
   },
-  description: {
-    type: DataTypes.TEXT
-  },
-  price: {
-    type: DataTypes.FLOAT,
+  password: {
+    type: DataTypes.STRING,
     allowNull: false
   }
 });
 
-module.exports = Property;
+module.exports = Tenant;

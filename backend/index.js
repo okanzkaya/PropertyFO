@@ -3,14 +3,8 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
-const users = require('./routes/users');
-const properties = require('./routes/properties');
-const tenants = require('./routes/tenants');
-const tickets = require('./routes/tickets');
-const documents = require('./routes/documents');
-const payments = require('./routes/payments');
-const subscriptions = require('./routes/subscriptions');
 const sequelize = require('./config/database');
+const routes = require('./routes');
 
 require('dotenv').config();
 
@@ -25,30 +19,24 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Rate Limiting
 const limiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 100 // limit each IP to 100 requests per windowMs
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100 // limit each IP to 100 requests per windowMs
 });
 app.use(limiter);
 
 // Routes
-app.use('/api/users', users);
-app.use('/api/properties', properties);
-app.use('/api/tenants', tenants);
-app.use('/api/tickets', tickets);
-app.use('/api/documents', documents);
-app.use('/api/payments', payments);
-app.use('/api/subscriptions', subscriptions);
+app.use('/api', routes);
 
 // Root URL route
 app.get('/', (req, res) => {
-    res.send('Welcome to the Property Management API');
+  res.send('Welcome to the Property Management API');
 });
 
 // Database connection
 sequelize.authenticate()
-    .then(() => console.log('Database connected'))
-    .catch(err => console.log('Error: ' + err));
+  .then(() => console.log('Database connected'))
+  .catch(err => console.log('Error: ' + err));
 
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
