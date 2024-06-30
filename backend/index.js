@@ -16,17 +16,22 @@ app.use(cors());
 
 // Import Routes
 const usersRoute = require('./routes/users');
-// Add other routes similarly
+// Import other routes here
 
 // Route Middlewares
 app.use('/api/users', usersRoute);
-// Add other route middlewares similarly
+// Add other route middlewares here
+
+// Root route
+app.get('/', (req, res) => {
+    res.send('Welcome to PropertyFO API Test 3');
+});
 
 // Sync Database and Start Server
 sequelize.sync().then(() => {
-  app.listen(process.env.PORT || 5000, () => {
-    console.log(`Server is running on port ${process.env.PORT || 5000}`);
-  });
+    app.listen(process.env.PORT || 5000, () => {
+        console.log(`Server is running on port ${process.env.PORT || 5000}`);
+    });
 }).catch(err => {
-  console.error('Unable to connect to the database:', err);
+    console.error('Unable to connect to the database:', err);
 });
