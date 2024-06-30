@@ -31,6 +31,7 @@ app.use('/api/tickets', require('./routes/tickets'));
 app.use('/api/payments', require('./routes/payments'));
 app.use('/api/documents', require('./routes/documents'));
 
+// Start the server
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
