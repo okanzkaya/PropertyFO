@@ -1,6 +1,6 @@
 # propertyFO
 
-propertyFO is a comprehensive property management SaaS application designed to streamline the tasks of property managers. Using the MERN stack (MongoDB, Express, React, Node.js), propertyFO offers a secure, optimized, and professional solution for managing properties, tenants, leases, and payments.
+propertyFO is a comprehensive property management SaaS application designed to streamline the tasks of property managers. Using the MERN stack (MySQL, Express, React, Node.js), propertyFO offers a secure, optimized, and professional solution for managing properties, tenants, leases, and payments.
 
 ## Features
 
@@ -20,7 +20,7 @@ propertyFO is a comprehensive property management SaaS application designed to s
 
 ## Technology Stack
 
-- **MongoDB:** For storing data related to properties, tenants, leases, and transactions.
+- **MySQL:** For storing data related to properties, tenants, leases, and transactions.
 - **Express.js:** For backend API and server management.
 - **React.js:** For building a responsive and user-friendly frontend.
 - **Node.js:** For server-side logic and operations.
@@ -30,7 +30,6 @@ propertyFO is a comprehensive property management SaaS application designed to s
 - **IDE:** Visual Studio Code (VSCode)
 - **Version Control:** Git
 - **Repository:** GitHub
-- **Hosting:** VPS with 4GB RAM
 
 ## Installation
 
@@ -73,12 +72,10 @@ propertyFO is a comprehensive property management SaaS application designed to s
 ### Backend (Express.js)
 - **routes/**
   - Contains route definitions for API endpoints.
-- **controllers/**
-  - Contains logic for handling requests.
 - **models/**
-  - Contains MongoDB schema definitions.
-- **middleware/**
-  - Contains middleware functions for authentication, validation, etc.
+  - Contains Sequelize model definitions.
+- **config/**
+  - Contains database configuration.
 
 ### Frontend (React.js)
 - **components/**
@@ -118,4 +115,3 @@ This project is licensed under a proprietary license. See the LICENSE.txt file f
 ## Contact
 
 For questions or support, please contact [your email address].
-

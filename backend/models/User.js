@@ -1,13 +1,36 @@
-const mongoose = require('mongoose');
+// backend/models/User.js
 
-const UserSchema = new mongoose.Schema({
-  email: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
-  subscriptionStatus: { type: String, default: 'inactive' },
-  subscriptionPlan: { type: String },
-  subscriptionEndDate: { type: Date },
-  propertiesCreated: { type: Number, default: 0 },
-  ticketsCreated: { type: Number, default: 0 }
+const { DataTypes } = require('sequelize');
+const sequelize = require('../config/database');
+
+const User = sequelize.define('User', {
+  email: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true
+  },
+  password: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  subscriptionStatus: {
+    type: DataTypes.STRING,
+    defaultValue: 'inactive'
+  },
+  subscriptionPlan: {
+    type: DataTypes.STRING
+  },
+  subscriptionEndDate: {
+    type: DataTypes.DATE
+  },
+  propertiesCreated: {
+    type: DataTypes.INTEGER,
+    defaultValue: 0
+  },
+  ticketsCreated: {
+    type: DataTypes.INTEGER,
+    defaultValue: 0
+  }
 });
 
-module.exports = mongoose.model('User', UserSchema);
+module.exports = User;
