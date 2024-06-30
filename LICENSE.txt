@@ -1,0 +1,26 @@
+Proprietary License Agreement
+
+This Proprietary License Agreement ("Agreement") is made between [Your Company] ("Licensor") and the user ("Licensee").
+
+1. Grant of License
+   Subject to the terms of this Agreement, Licensor grants Licensee a non-exclusive, non-transferable license to use the software ("Software").
+
+2. Restrictions
+   Licensee shall not:
+   - Copy, modify, or distribute the Software.
+   - Reverse engineer, decompile, or disassemble the Software.
+   - Use the Software for any illegal purposes.
+
+3. Term and Termination
+   This Agreement is effective until terminated. Licensor may terminate this Agreement at any time if Licensee violates any terms. Upon termination, Licensee must destroy all copies of the Software.
+
+4. Limitation of Liability
+   In no event shall Licensor be liable for any damages arising out of the use or inability to use the Software.
+
+5. Warranties
+   The Software is provided "as is" without any warranties of any kind, express or implied.
+
+By using the Software, Licensee agrees to the terms of this Agreement.
+
+Okan Özkaya,
+06/30/2024
