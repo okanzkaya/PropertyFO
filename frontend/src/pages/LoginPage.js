@@ -2,13 +2,23 @@ import React, { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
+import sanitizeHtml from 'sanitize-html';
 
 const LoginPage = () => {
   const [error, setError] = useState(null);
 
   const handleSubmit = async (values) => {
+    const sanitizedValues = {
+      email: sanitizeHtml(values.email),
+      password: sanitizeHtml(values.password),
+    };
+
     try {
-      const response = await axios.post('/api/users/login', values);
+      const response = await axios.post('/api/users/login', sanitizedValues, {
+        headers: {
+          'X-CSRF-Token': localStorage.getItem('csrfToken'), // Assuming CSRF token is stored in localStorage
+        },
+      });
       localStorage.setItem('token', response.data.token);
       // Redirect to dashboard
       window.location.href = '/dashboard';

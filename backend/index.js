@@ -1,3 +1,4 @@
+// backend/index.js
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -33,9 +34,7 @@ app.get('/', (req, res) => {
 });
 
 // Database connection
-sequelize.authenticate()
-  .then(() => console.log('Database connected'))
-  .catch(err => console.log('Error: ' + err));
+sequelize.connectDB();
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
