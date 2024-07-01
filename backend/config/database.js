@@ -1,10 +1,13 @@
-// backend/config/database.js
-const { Sequelize } = require('sequelize');
 require('dotenv').config();
+const { Sequelize } = require('sequelize');
 
-const sequelize = new Sequelize(process.env.DATABASE_URL, {
-  dialect: 'mysql', // Ensure this matches your database type
-  logging: false, // Disable logging for performance improvement
+// Construct the DATABASE_URL from individual environment variables
+const { DB_NAME, DB_USER, DB_PASSWORD, DB_HOST } = process.env;
+const databaseUrl = `mysql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`;
+
+const sequelize = new Sequelize(databaseUrl, {
+  dialect: 'mysql',
+  logging: false,
 });
 
 const connectDB = async () => {
